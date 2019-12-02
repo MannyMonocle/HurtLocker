@@ -6,6 +6,7 @@ public class DataReaderTest {
     static String simple = "First2Items";
     static String hurtFile = "RawData.txt";
     static String jawn = "NAME:MilK;price:3.23;type:Food;expiration:1/17/2016";
+    static String badJawn = "naMe:;price:3.23;type:Food^expiration:1/04/2016##";
 
     @Test
     public void turnFileStringIntoStringArrayTest() throws Exception{
@@ -23,17 +24,11 @@ public class DataReaderTest {
     }
 
     @Test
-    public void organizeAsLinesTest() {
+    public void turnStringIntoItemTest(){
         DataReader test = new DataReader();
-        String output = test.organizeAsLines(jawn);
-        System.out.println(output);
+        Item item = test.turnStringIntoItem(jawn);
+        String cost = item.getPrice();
+        Assert.assertEquals("3.23",cost);
     }
 
-    @Test
-    public void examineOrganizedRawData()throws Exception{
-        DataReader test = new DataReader();
-        String raw = test.getFileAsString(hurtFile);
-        String output = test.organizeAsLines(raw);
-        System.out.println(output);
-    }
 }
