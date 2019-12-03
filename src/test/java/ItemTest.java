@@ -9,31 +9,19 @@ public class ItemTest {
     static String jawn = "NAME:MilK;price:3.23;type:Food;expiration:1/17/2016";
     static String badJawn = "naMe:;price:3.23;type:Food^expiration:1/04/2016##";
 
-    @Test
-    public void itemToStringTest() {
-        DataReader test = new DataReader();
-        Item item = test.turnStringIntoItem(jawn);
-        System.out.println(item.toString());
-    }
+//    @Test
+////    public void itemToStringTest() {
+////        DataReader test = new DataReader();
+////        Item item = test.turnStringIntoItem(jawn);
+////        System.out.println(item.toString());
+////    }
+////
+////    @Test
+////    public void errorToStringTest() {
+////        DataReader test = new DataReader();
+////        Item item = test.turnStringIntoItem(badJawn);
+////        System.out.println(item.toString());
+////    }
 
-    @Test
-    public void errorToStringTest() {
-        DataReader test = new DataReader();
-        Item item = test.turnStringIntoItem(badJawn);
-        System.out.println(item.toString());
-    }
 
-    @Test
-    public void isErrorTest() {
-        DataReader test = new DataReader();
-        Item item = test.turnStringIntoItem(badJawn);
-        Assert.assertTrue(item.isError());
-    }
-
-    @Test
-    public void isNotErrorTest() {
-        DataReader test = new DataReader();
-        Item item = test.turnStringIntoItem(jawn);
-        Assert.assertFalse(item.isError());
-    }
 }

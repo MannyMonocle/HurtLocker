@@ -17,23 +17,23 @@ public class DataReader {
         catch (Exception e) {return "Error in File";}
     }
 
-    public String[] turnFileStringIntoStringArray(String fileName) {
+    private String[] turnFileStringIntoStringArray(String fileName) {
         String fileAsString = getFileAsString(fileName);
         String[] items = fileAsString.split("##");
         return items;
     }
 
-    public String[] splitIntoFieldArray(String itemAsString) {
+    private String[] splitIntoFieldArray(String itemAsString) {
         return itemAsString.split("[:@^*%;!]");
     }
 
-    public Boolean isGood(String[] fields) {
+    private Boolean isGood(String[] fields) {
         if(fields.length != 8){ errorCount++; return false; }
         for(String field : fields){ if(field.equals("")){errorCount++; return false; }}
         return true;
     }
 
-    public Item makeItemFromFieldArray(String[] fields) {
+    private Item makeItemFromFieldArray(String[] fields) {
         String name = fields[1].toLowerCase();
         String price = fields[3].toLowerCase();
         String type = fields[5].toLowerCase();
@@ -42,7 +42,7 @@ public class DataReader {
         return new Item(name,price,type,expiration);
     }
 
-    public Item turnStringIntoItem(String itemAsString){
+    private Item turnStringIntoItem(String itemAsString){
         String[] fields = splitIntoFieldArray(itemAsString);
         if (isGood(fields)){
             Item thing = makeItemFromFieldArray(fields);

@@ -6,6 +6,7 @@ public class Item {
     String price;
     String type;
     String expiration;
+    String key;
 
 
     public Item(String name, String price, String type, String expiration) {
@@ -13,6 +14,7 @@ public class Item {
         this.price = price;
         this.type = type;
         this.expiration = expiration;
+        this.key = name + price;
     }
 
     public String getName() {
@@ -29,6 +31,10 @@ public class Item {
 
     public String getExpiration() {
         return expiration;
+    }
+
+    public String getKey() {
+        return key;
     }
 
     @Override
