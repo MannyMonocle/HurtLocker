@@ -7,6 +7,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 
 public class DataReader {
+    Integer errorCount = 0;
 
     public  String getFileAsString(String fileName) {
         ClassLoader classLoader = getClass().getClassLoader();
@@ -16,14 +17,20 @@ public class DataReader {
         catch (Exception e) {return "Error in File";}
     }
 
-    public String[] turnFileStringIntoStringArray(String file) {
-        String fileAsString = getFileAsString(file);
+    public String[] turnFileStringIntoStringArray(String fileName) {
+        String fileAsString = getFileAsString(fileName);
         String[] items = fileAsString.split("##");
         return items;
     }
 
     public String[] splitIntoFieldArray(String itemAsString) {
-        return itemAsString.split("[:@^*%;]");
+        return itemAsString.split("[:@^*%;!]");
+    }
+
+    public Boolean isGood(String[] fields) {
+        if(fields.length != 8){ errorCount++; return false; }
+        for(String field : fields){ if(field.equals("")){errorCount++; return false; }}
+        return true;
     }
 
     public Item makeItemFromFieldArray(String[] fields) {
@@ -37,16 +44,25 @@ public class DataReader {
 
     public Item turnStringIntoItem(String itemAsString){
         String[] fields = splitIntoFieldArray(itemAsString);
-        return makeItemFromFieldArray(fields);
+        if (isGood(fields)){
+            Item thing = makeItemFromFieldArray(fields);
+            return thing;
+        }
+        System.out.println(itemAsString);
+        return null;
     }
 
-    public ArrayList<Item> turnFileStringIntoItemList(String file) {
+    public ArrayList<Item> turnFileIntoItemList(String fileName) {
         ArrayList<Item> itemList = new ArrayList<Item>();
-        String[] itemStrings = turnFileStringIntoStringArray(file);
+        String[] itemStrings = turnFileStringIntoStringArray(fileName);
         for(String stuff : itemStrings){
             Item item = turnStringIntoItem(stuff);
-            itemList.add(item);
+            if(item != null) {
+                itemList.add(item);
+            }
         }
         return itemList;
     }
+
+
 }

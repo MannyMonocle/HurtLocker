@@ -41,4 +41,7 @@ public class Item {
                 '}';
     }
 
+    public Boolean isError() {
+        return name.equals("") || price.equals("") || type.equals("") || expiration.equals("");
+    }
 }

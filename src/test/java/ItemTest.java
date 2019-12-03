@@ -23,5 +23,17 @@ public class ItemTest {
         System.out.println(item.toString());
     }
 
+    @Test
+    public void isErrorTest() {
+        DataReader test = new DataReader();
+        Item item = test.turnStringIntoItem(badJawn);
+        Assert.assertTrue(item.isError());
+    }
 
+    @Test
+    public void isNotErrorTest() {
+        DataReader test = new DataReader();
+        Item item = test.turnStringIntoItem(jawn);
+        Assert.assertFalse(item.isError());
+    }
 }
